@@ -1,0 +1,98 @@
+
+REGISTRATION PAGE 
+    HTML PAGE OF REGISTRATION 
+    BCAKEND - registration page - get data - make mongodb connection 
+    use schema and saave data to data base.
+
+AUTHENTICATION - checking login and password is correct . ( taking password from data base and matching it ).
+
+?HOW TO REDIRECT FROM ONE PAGE TO ANOTHER PAGE
+- res.render("/login");     (not working)
+
+
+/*--------------------COMPLETE INFO OF THIS SITE------------------------------------*/
+1. INDEX.JS ----------------------------------------------------------------
+    1. dotenv configuration -> to safely store data of connection mails and servers so not to send to any user publically
+    2. express -> to make backend easy api access , 3rd party tool
+    3. HOST -> on which host you want to run the server , data taken from dotenv file 
+    4. PORT -> port number on which you are running application , (80-> http , 443-> https)fixed , (65535-> total port)(256*256 -1(fixed port (.255.255)))
+    5. fs -> although it is not used ,but it's work is to load the file and do work on the file , writing , reading , updating , even serving html files)
+    6. jwt -> (JSON WEB TOKENIZATION) used to send tokens for validation purpose to work on it , if token is correct then grant access else blocked the access to the user 
+    7. cors -> (cross origin resource sharing) to limit the source sharing of data like , using cors() - allows access to all , using cors("origin":"893.123.322.456) - allows access to this particular ip address , list can also be provided of ip address whom to allow data sharing  .
+                like here i have used -> app.use(cors("localhost:4200"));
+    8. cookie-parser -> middleware allows cookies attached with request from client - server. 
+
+    9. routing -> for every url , assigning particular routing for easy maintainability of work to be done within the application.
+    10. auth -> using function for authentication if the user is valid or not .
+    11. require("./db/conn"); -> making database connetion so storing all info in that file and using at last for making connection
+
+    12. express.json() -> parse incoming requests with json payloads and based upon bodyparser
+        // calling body-parser to handle the Request Object from POST requests
+            var bodyParser = require('body-parser');
+        // parse application/json, basically parse incoming Request Object as a JSON Object 
+            app.use(bodyParser.json());
+        // parse application/x-www-form-urlencoded, basically can only parse incoming Request Object if strings or arrays
+            app.use(bodyParser.urlencoded({ extended: false }));
+        // combines the 2 above, then you can parse incoming Request Object if object, with nested objects, or generally any type.
+            app.use(bodyParser.urlencoded({ extended: true }));
+
+    13. app.use(<url> , <routing> ) -> on each url which url should works handle here .
+    14. app.listen(port); -> listens to that specfic port and builds server on that port.
+
+2. .env file ------------------------------------------------------------------------------------------------
+    IT STORES THE DATA TO PROVIDE SECURITY AND NOT TO BE PUBLICALYY EXPLOITED 
+    HOST = localhost
+    PORT = 3000
+
+    //hide data from getting viewed on server 
+
+    MAIL_MAILER = smtp  
+    MAIL_HOST = smtp.googlemail.com
+    MAIL_PORT = 465
+    MAIL_USERNAME = "praffulpratap@gmail.com"
+    MAIL_PASSWORD = adhiraj
+    MAIL_ENCRYPTION = ssl 
+    MAIL_FROM_ADDRESS = "praffulpratap@gmail.com"
+    MAIL_FROM_NAME = "(APP_NAME)"
+    //PROVIDE APP NAME HERE
+
+    IT CAN BE USED AS process.env.HOST;
+
+3. routing folder -----------------------------------------------------------------------------------
+    it contains all routing values on which route what to occur
+
+4. pages --------------------------------------------------------------------------------
+    it contains all html files which we can render using rendering static pages in it  
+
+5. modules -------------------------------------------------------------------------------- 
+    it contains schema for database for every databasse how to store that information   
+
+    1. admin.js -> it controls the db of admin what all info to get saved over there 
+    2. register.js -> all users who are registering getting their data saved over here  
+
+    every db becomes a document and what all info we need to save is defined by schema within mongodb
+
+6.  DATABASE db> conn.js -> it contains url of databasse where we need to save the data actual mongodb atlas url
+        without db connections all the schema are useless bcz data will not be there. 
+
+7. API -> like normally we are sending or rendering files , api folder - inside that routing can be used to render only json data , to send data.
+
+8. CONFIG  -> folder to contain all files with some proper function or algo to perform their task  
+    1. authentication -> function which accepts and checks if user is authenticated or not like 
+                        after login , if that part is visible by student or not , usiing access role as [ teacher , principal]
+    
+    2. cookies and session -> need to work ................
+
+    3. encrypt -> encrypt the data to protect against attacks  
+
+    4. JWT -> sending tokens for validation  .... need to work ........
+
+    5. localstorage -> storing information loclly .....NTW........
+
+    6. mailcontroller -> to send mail ..... need to work .....
+
+    7. sessions -> creating sessions and working on them .... need to work ....
+
+
+
+
